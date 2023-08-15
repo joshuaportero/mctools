@@ -24,7 +24,7 @@ public class WeatherCMD implements CommandExecutor, TabCompleter {
 
         if (label.equalsIgnoreCase("weather")) {
             if (args.length == 0) {
-                player.sendMessage(StringUtil.color("&cUsage: /weather <clear|rain> <duration> <thunder>"));
+                player.sendMessage(StringUtil.color("&cUsage: /weather <clear|rain> [duration] [thunder]"));
                 return false;
             }
 
