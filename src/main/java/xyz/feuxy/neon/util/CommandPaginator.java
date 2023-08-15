@@ -36,6 +36,7 @@ public class CommandPaginator {
         commands.add("  &7- &e/clean &7- &fRemove any effects.");
         commands.add("  &7- &e/clean <player> &7- &fRemove any effects from a player.");
         commands.add("  &7- &e/butcher &7- &fKill all animals and monsters.");
+        commands.add("  &7- &e/back &7- &fTeleport to your last location.");
     }
 
     public void sendPage(Player player, int pageNumber) {

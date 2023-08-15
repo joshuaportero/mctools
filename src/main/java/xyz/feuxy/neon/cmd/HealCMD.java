@@ -19,6 +19,7 @@ public class HealCMD implements CommandExecutor {
         player.setHealth(20);
         player.setFoodLevel(20);
         player.setSaturation(20);
+        player.setFireTicks(0);
         player.sendMessage(StringUtil.color("&aYou have been healed!"));
 
         return true;

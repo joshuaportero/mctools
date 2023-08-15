@@ -73,6 +73,7 @@ public class WeatherCMD implements CommandExecutor, TabCompleter {
         if (label.equalsIgnoreCase("sun")) {
             world.setThundering(false);
             world.setStorm(false);
+            player.getWorld().setWeatherDuration(Integer.MAX_VALUE);
             player.sendMessage(StringUtil.color("&aWeather set to clear!"));
             return true;
         }
@@ -80,6 +81,7 @@ public class WeatherCMD implements CommandExecutor, TabCompleter {
         if (label.equalsIgnoreCase("rain")) {
             world.setThundering(false);
             world.setStorm(true);
+            player.getWorld().setWeatherDuration(Integer.MAX_VALUE);
             player.sendMessage(StringUtil.color("&aWeather set to rain!"));
             return true;
         }

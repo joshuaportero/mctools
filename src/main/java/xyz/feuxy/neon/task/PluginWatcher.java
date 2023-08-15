@@ -37,7 +37,7 @@ public class PluginWatcher implements Runnable {
 
         this.deleteDuplicatePlugins();
 
-        if (this.checkPluginChange()) {
+        if (this.isPluginChange()) {
             this.alertAndReload();
         }
     }
@@ -49,29 +49,28 @@ public class PluginWatcher implements Runnable {
      * @return true if any plugin have been modified
      * @see PluginWatcher#pluginQueue
      */
-    private boolean checkPluginChange() {
+    private boolean isPluginChange() {
         File[] fileList = this.pluginFolder.listFiles();
 
         if (fileList == null) return false;
-
-        boolean hasChanges = false;
 
         for (File plugin : fileList) {
             if (plugin.getName().endsWith(".jar")) {
                 PluginModel pluginModel = this.getDetailsFromJarFile(plugin);
                 if (pluginModel != null) {
+                    if (pluginModel.getName().equalsIgnoreCase("neon")) continue;
                     long lastModified = plugin.lastModified();
                     if (lastModifiedPlugins.containsKey(pluginModel.getName())) {
                         if (lastModified != lastModifiedPlugins.get(pluginModel.getName())) {
                             this.pluginQueue.add(pluginModel);
-                            hasChanges = true;
+                            return true;
                         }
                     }
                     lastModifiedPlugins.put(pluginModel.getName(), lastModified);
                 }
             }
         }
-        return hasChanges;
+        return false;
     }
 
     private void alertAndReload() {
@@ -79,7 +78,7 @@ public class PluginWatcher implements Runnable {
             Instant now = Instant.now();
             PluginModel plugin = pluginQueue.poll();
 
-            if (plugin == null || plugin.getName().equalsIgnoreCase("Neon")) continue;
+            if (plugin == null) continue;
 
 //            this.broadcast("&e" + plugin.getName() + "&a has been modified!");
             Plugin pluginToReload = this.pluginManager.getPlugin(plugin.getName());
