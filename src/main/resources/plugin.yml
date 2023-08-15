@@ -1,0 +1,63 @@
+main: xyz.feuxy.neon.Main
+name: Neon
+version: ${version}
+author: Feuxy
+description: Neon is development kit for Minecraft plugins. Do not use this plugin in production environment.
+api-version: 1.13
+commands:
+  neon:
+    description: Main command for Neon.
+  operator:
+    description: Toggle operator status.
+    aliases:
+      - o
+  give:
+    description: Give yourself an item.
+    aliases:
+      - i
+  speed:
+    description: Change your flying-walking speed.
+  top:
+    description: Teleport to the highest block.
+  up:
+    description: Teleport above and place a glass block below you.
+  back:
+    description: Teleport to your previous location.
+  clear:
+    description: Clear your inventory.
+    aliases:
+      - ci
+  clearchat:
+    description: Clear the chat.
+    aliases:
+      - cc
+  clean:
+    description: Remove any potion-fire effects.
+  heal:
+    description: Heal yourself.
+  feed:
+    description: Feed yourself.
+  fly:
+    description: Toggle fly mode.
+  gmc:
+    description: Change your gamemode to creative.
+  gms:
+    description: Change your gamemode to survival.
+  gmsp:
+    description: Change your gamemode to spectator.
+  gma:
+    description: Change your gamemode to adventure.
+  butcher:
+    description: Kill all mobs-animals-arrows-items in your world.
+  day:
+    description: Change the time to 06:00 am.
+  night:
+    description: Change the time to 06:00 pm.
+  sun:
+    description: Change the weather to sunny.
+  rain:
+    description: Change the weather to rainy.
+  weather:
+    description: Change the weather.
+  time:
+    description: Change the time.

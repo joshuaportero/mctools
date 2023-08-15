@@ -1,0 +1,8 @@
+neon:
+  on-join:
+    announce: true
+  file:
+    watcher:
+      enabled: true
+      logger: true
+      interval: 2
