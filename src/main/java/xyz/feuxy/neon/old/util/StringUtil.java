@@ -1,8 +1,8 @@
-package xyz.feuxy.neon.util;
+package xyz.feuxy.neon.old.util;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
-import xyz.feuxy.neon.Main;
+import xyz.feuxy.neon.old.Main;
 
 /**
  * A utility class for strings
@@ -40,9 +40,7 @@ public class StringUtil {
      */
     public static void broadcast(String message) {
         Main.getInstance().getLogger().info(color(message));
-        Main.getInstance().getServer().getOnlinePlayers().forEach(player -> {
-            player.sendMessage(color(message));
-        });
+        Main.getInstance().getServer().getOnlinePlayers().forEach(player -> player.sendMessage(color(message)));
     }
 
     /**

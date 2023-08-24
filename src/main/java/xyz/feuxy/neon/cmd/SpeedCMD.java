@@ -3,26 +3,35 @@ package xyz.feuxy.neon.cmd;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import xyz.feuxy.neon.util.StringUtil;
+import xyz.feuxy.neon.locale.Message;
 
-public class SpeedCMD implements CommandExecutor {
+import java.util.List;
+
+public class SpeedCMD implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(StringUtil.color("&cYou must be a player to execute this command!"));
+
+        if (!(sender instanceof Player)) {
+            Message.PLAYERS_ONLY.send(sender);
             return false;
         }
 
-        // TODO: Let players set their own speed and set other players' speed
-        if (player.getFlySpeed() == 1F) {
-            player.setFlySpeed(0.1F);
-            player.sendMessage(StringUtil.color("&aYour fly speed has been set to &e0.1&a!"));
-        } else {
-            player.setFlySpeed(1F);
-            player.sendMessage(StringUtil.color("&aYour fly speed has been set to &e1&a!"));
+        Player player = (Player) sender;
+
+        if (args.length == 0) {
+            Message.CMD_SPEED_USAGE.send(player);
+            return false;
         }
 
-        return true;
+        // TODO: Implement speed command
+
+        return false;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        return null;
     }
 }

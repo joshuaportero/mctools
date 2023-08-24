@@ -1,4 +1,4 @@
-package xyz.feuxy.neon.task.model;
+package xyz.feuxy.neon.old.task.model;
 
 import lombok.*;
 @Builder

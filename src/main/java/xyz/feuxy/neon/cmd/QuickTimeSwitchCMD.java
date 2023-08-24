@@ -6,8 +6,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import xyz.feuxy.neon.locale.Message;
 
-public class OperatorCMD implements CommandExecutor {
+import java.util.HashMap;
+import java.util.Map;
 
+public class QuickTimeSwitchCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -17,13 +19,16 @@ public class OperatorCMD implements CommandExecutor {
 
         Player player = (Player) sender;
 
+        Map<String, Long> timeMap = new HashMap<>();
+        timeMap.put("day", 0L);
+        timeMap.put("noon", 6000L);
+        timeMap.put("night", 13000L);
+        timeMap.put("midnight", 18000L);
+
         if (args.length == 0) {
-            player.setOp(!player.isOp());
-            if (player.isOp()) {
-                Message.CMD_OPERATOR_SELF_ENABLED.send(player);
-            } else {
-                Message.CMD_OPERATOR_SELF_DISABLED.send(player);
-            }
+            String time = label.toLowerCase();
+            player.getWorld().setTime(timeMap.get(time));
+            Message.CMD_TIME_CHANGED.send(player, time, timeMap.get(time));
             return true;
         } else {
             Message.INVALID_ARGUMENTS.send(player);

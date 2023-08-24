@@ -1,12 +1,12 @@
-package xyz.feuxy.neon.task;
+package xyz.feuxy.neon.old.task;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
-import xyz.feuxy.neon.Main;
-import xyz.feuxy.neon.config.ConfigKeys;
-import xyz.feuxy.neon.task.model.PluginModel;
-import xyz.feuxy.neon.util.StringUtil;
+import xyz.feuxy.neon.old.Main;
+import xyz.feuxy.neon.old.config.ConfigKeys;
+import xyz.feuxy.neon.old.task.model.PluginModel;
+import xyz.feuxy.neon.old.util.StringUtil;
 
 import java.io.File;
 import java.io.InputStream;

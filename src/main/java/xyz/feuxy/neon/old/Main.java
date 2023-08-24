@@ -1,12 +1,14 @@
-package xyz.feuxy.neon;
+package xyz.feuxy.neon.old;
 
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.feuxy.neon.cmd.*;
-import xyz.feuxy.neon.config.ConfigKeys;
-import xyz.feuxy.neon.listener.OnBackListener;
-import xyz.feuxy.neon.listener.OnJoinListener;
-import xyz.feuxy.neon.task.PluginWatcher;
+import xyz.feuxy.neon.old.cmd.*;
+import xyz.feuxy.neon.old.cmd.OperatorCMD;
+import xyz.feuxy.neon.old.config.ConfigKeys;
+import xyz.feuxy.neon.old.listener.OnBackListener;
+import xyz.feuxy.neon.old.listener.OnJoinListener;
+import xyz.feuxy.neon.old.task.PluginWatcher;
 
 public class Main extends JavaPlugin {
 
@@ -46,39 +48,7 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("neon").setExecutor(new NeonCMD());
 
-        this.getCommand("operator").setExecutor(new OperatorCMD());
-
-        this.getCommand("up").setExecutor(new UpCMD());
-        this.getCommand("top").setExecutor(new TopCMD());
-        this.getCommand("back").setExecutor(new BackCMD());
-
-        this.getCommand("gmc").setExecutor(new GamemodeCMD());
-        this.getCommand("gms").setExecutor(new GamemodeCMD());
-        this.getCommand("gma").setExecutor(new GamemodeCMD());
-        this.getCommand("gmsp").setExecutor(new GamemodeCMD());
-
-        this.getCommand("give").setExecutor(new GiveCMD());
-
-        this.getCommand("clear").setExecutor(new ClearCMD());
-        this.getCommand("clearchat").setExecutor(new ClearChatCMD());
-        this.getCommand("clean").setExecutor(new CleanCMD());
-
-        this.getCommand("time").setExecutor(new TimeCMD());
-        this.getCommand("day").setExecutor(new TimeCMD());
-        this.getCommand("night").setExecutor(new TimeCMD());
-
-        this.getCommand("weather").setExecutor(new WeatherCMD());
-        this.getCommand("sun").setExecutor(new WeatherCMD());
-        this.getCommand("rain").setExecutor(new WeatherCMD());
-
-        this.getCommand("fly").setExecutor(new FlyCMD());
-        this.getCommand("heal").setExecutor(new HealCMD());
-        this.getCommand("feed").setExecutor(new FeedCMD());
-        this.getCommand("speed").setExecutor(new SpeedCMD());
-
-        this.getCommand("butcher").setExecutor(new ButcherCMD());
     }
 
     public void registerTabCompleter() {

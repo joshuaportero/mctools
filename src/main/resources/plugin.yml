@@ -1,63 +1,53 @@
-main: xyz.feuxy.neon.Main
+main: xyz.feuxy.neon.Neon
 name: Neon
 version: ${version}
 author: Feuxy
 description: Neon is development kit for Minecraft plugins. Do not use this plugin in production environment.
 api-version: 1.13
 commands:
-  neon:
-    description: Main command for Neon.
   operator:
-    description: Toggle operator status.
+    description: Toggle operator mode.
     aliases:
       - o
-  give:
-    description: Give yourself an item.
-    aliases:
-      - i
-  speed:
-    description: Change your flying-walking speed.
-  top:
-    description: Teleport to the highest block.
-  up:
-    description: Teleport above and place a glass block below you.
-  back:
-    description: Teleport to your previous location.
   clear:
     description: Clear your inventory.
     aliases:
       - ci
-  clearchat:
-    description: Clear the chat.
-    aliases:
-      - cc
-  clean:
-    description: Remove any potion-fire effects.
   heal:
-    description: Heal yourself.
-  feed:
-    description: Feed yourself.
-  fly:
-    description: Toggle fly mode.
+    description: Restore your health, food, and potion effects.
+  butcher:
+    description: Kill all entities in your world.
   gmc:
     description: Change your gamemode to creative.
   gms:
     description: Change your gamemode to survival.
-  gmsp:
-    description: Change your gamemode to spectator.
   gma:
     description: Change your gamemode to adventure.
-  butcher:
-    description: Kill all mobs-animals-arrows-items in your world.
+  gmsp:
+    description: Change your gamemode to spectator.
+  gamemode:
+    description: Change your gamemode.
+    aliases:
+      - gm
+  clearchat:
+    description: Clear the chat.
+    aliases:
+      - cc
   day:
-    description: Change the time to 06:00 am.
+    description: Change the time to day.
+  noon:
+    description: Change the time to noon.
   night:
-    description: Change the time to 06:00 pm.
+    description: Change the time to night.
+  midnight:
+    description: Change the time to midnight.
   sun:
     description: Change the weather to sunny.
   rain:
     description: Change the weather to rainy.
-  weather:
-    description: Change the weather.
-  time:
-    description: Change the time.
+  storm:
+    description: Change the weather to stormy.
+  up:
+    description: Teleport an amount of blocks up.
+  speed:
+    description: Change your speed.

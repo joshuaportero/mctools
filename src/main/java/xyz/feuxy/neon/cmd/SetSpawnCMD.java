@@ -7,7 +7,7 @@ import org.bukkit.command.TabCompleter;
 
 import java.util.List;
 
-public class FeedCMD implements CommandExecutor, TabCompleter {
+public class SetSpawnCMD implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         return false;

@@ -1,4 +1,4 @@
-package xyz.feuxy.neon.util;
+package xyz.feuxy.neon.old.util;
 
 import org.bukkit.entity.Player;
 

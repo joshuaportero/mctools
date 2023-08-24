@@ -6,11 +6,11 @@ plugins {
 }
 
 group = "xyz.feuxy.neon"
-version = "1.3.0-SNAPSHOT"
+version = "2.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks.withType<JavaCompile> {
@@ -40,5 +40,5 @@ tasks.register<Copy>("updatePluginYml") {
 
 tasks.named<ShadowJar>("shadowJar") {
     dependsOn("updatePluginYml")
-    archiveFileName.set("Neon.jar")
+    archiveFileName.set("${project.name}-${project.version}.jar")
 }

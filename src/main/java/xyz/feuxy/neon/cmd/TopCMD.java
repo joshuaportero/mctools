@@ -7,24 +7,33 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.feuxy.neon.util.StringUtil;
+import xyz.feuxy.neon.locale.Message;
 
 public class TopCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(StringUtil.color("&cYou must be a player to execute this command!"));
+        if (!(sender instanceof Player)) {
+            Message.PLAYERS_ONLY.send(sender);
             return false;
         }
 
-        // TODO: Keep player's yaw and pitch
-        Location location = player.getLocation();
-        Location topLocation = this.getLocation(player, location);
-        player.teleport(topLocation);
+        Player player = (Player) sender;
+
+        if (args.length == 0) {
+            Location location = player.getLocation();
+            Location topLocation = this.getLocation(player, location);
+            player.teleport(topLocation);
+            Message.CMD_TOP_TELEPORTED.send(player);
+            return true;
+        } else {
+            Message.INVALID_ARGUMENTS.send(player);
+        }
+
         return false;
     }
 
+    // TODO: Update this method to a more efficient algorithm
     private Location getLocation(Player player, Location location) {
         World world = player.getWorld();
 
@@ -32,7 +41,6 @@ public class TopCMD implements CommandExecutor {
         int z = location.getBlockZ();
         float yaw = location.getYaw();
         float pitch = location.getPitch();
-
 
         int highestY = world.getHighestBlockYAt(x, z);
 

@@ -1,4 +1,4 @@
-package xyz.feuxy.neon.listener;
+package xyz.feuxy.neon.old.listener;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import xyz.feuxy.neon.data.PlayerData;
+import xyz.feuxy.neon.old.data.PlayerData;
 
 public class OnBackListener implements Listener {
 

@@ -1,43 +1,60 @@
 package xyz.feuxy.neon.cmd;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import xyz.feuxy.neon.util.StringUtil;
+import xyz.feuxy.neon.locale.Message;
 
-public class UpCMD implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class UpCMD implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(StringUtil.color("&cYou must be a player to execute this command!"));
+        if (!(sender instanceof Player)) {
+            Message.PLAYERS_ONLY.send(sender);
             return false;
         }
+
+        Player player = (Player) sender;
 
         if (args.length == 0) {
-            player.sendMessage(StringUtil.color("&cPlease specify the amount of blocks you want to go up!"));
-            return false;
+            Message.CMD_UP_USAGE.send(player);
+            return true;
+        } else if (args.length == 1) {
+            int amount;
+            try {
+                amount = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                Message.INVALID_ARGUMENTS.send(player);
+                return false;
+            }
+            player.teleport(player.getLocation().add(0, amount, 0));
+            player.getLocation().add(0, -1, 0).getBlock().setType(Material.GLASS);
+            Message.CMD_UP_TELEPORTED.send(player, amount);
+            return true;
+        } else {
+            Message.INVALID_ARGUMENTS.send(player);
         }
+        return false;
+    }
 
-        double amount;
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (args.length == 1) {
 
-        try {
-            amount = Double.parseDouble(args[0]);
-        } catch (NumberFormatException e) {
-            player.sendMessage(StringUtil.color("&cPlease specify a valid number!"));
-            return false;
+            List<String> suggestions = new ArrayList<>(Arrays.asList("10", "20", "30", "40", "50", "60", "70", "80", "90", "100"));
+
+            String currentTyped = args[0].toLowerCase();
+            return suggestions.stream()
+                    .filter(name -> name.toLowerCase().startsWith(currentTyped))
+                    .collect(Collectors.toList());
         }
-
-        Location location = player.getLocation();
-        Location newLocation = location.add(0, amount, 0);
-
-        player.teleport(newLocation);
-        newLocation.subtract(0, 1, 0).getBlock().setType(Material.GLASS);
-        player.sendMessage(StringUtil.color("&aYou have been teleported up &e" + amount + " &ablocks!"));
-
-        return true;
+        return null;
     }
 }

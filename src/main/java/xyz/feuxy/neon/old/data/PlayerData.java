@@ -1,7 +1,6 @@
-package xyz.feuxy.neon.data;
+package xyz.feuxy.neon.old.data;
 
 import org.bukkit.Location;
-import xyz.feuxy.neon.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;

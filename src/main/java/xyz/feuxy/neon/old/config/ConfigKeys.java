@@ -1,7 +1,7 @@
-package xyz.feuxy.neon.config;
+package xyz.feuxy.neon.old.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import xyz.feuxy.neon.Main;
+import xyz.feuxy.neon.old.Main;
 
 public enum ConfigKeys {
 
