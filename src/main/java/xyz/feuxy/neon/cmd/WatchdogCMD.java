@@ -3,18 +3,30 @@ package xyz.feuxy.neon.cmd;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import xyz.feuxy.neon.locale.Message;
 
-import java.util.List;
-
-public class WatchdogCMD implements CommandExecutor, TabCompleter {
+public class WatchdogCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        return false;
-    }
+        if (!(sender instanceof Player)) {
+            Message.PLAYERS_ONLY.send(sender);
+            return false;
+        }
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return null;
+        Player player = (Player) sender;
+
+        // /watchdog [-h] -> Help
+        // /watchdog [-s] -> Watchdog Status
+        // /watchdog [-o] -> Watchdog toggle monitor
+        // /watchdog [-o] [--reload/--restart] [delay] -> Watchdog toggle monitor with delay (reload/restart)
+        // /watchdog [-r] [plugin] -> Delete plugin's folder
+        // /watchdog [-t] [server] [delay] -> Teleport to server on join with delay
+
+        if (args.length == 0) {
+            Message.INVALID_ARGUMENTS.send(player);
+            return true;
+        }
+        return false;
     }
 }

@@ -3,11 +3,10 @@ package xyz.feuxy.neon;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.feuxy.neon.cmd.*;
+import xyz.feuxy.neon.listener.PlayerListener;
 
 @Getter
 public class Neon extends JavaPlugin {
-
-    private static Neon instance;
 
     @Override
     public void onEnable() {
@@ -15,15 +14,10 @@ public class Neon extends JavaPlugin {
             return;
         }
 
-        this.setInstance(this);
-
         this.loadConfig();
+        this.registerTasks();
+        this.registerListeners();
         this.registerCommands();
-    }
-
-    @Override
-    public void onDisable() {
-        this.setInstance(null);
     }
 
     private void loadConfig() {
@@ -31,58 +25,52 @@ public class Neon extends JavaPlugin {
         this.saveConfig();
     }
 
+    private void registerTasks() {
+//        Bukkit.getScheduler().runTaskTimer(this, new WatchdogTask(this), 0L, 20L);
+    }
+
+    private void registerListeners() {
+        this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+    }
+
     private void registerCommands() {
-        this.getCommand("operator").setExecutor(new OperatorCMD());
+        this.getCommand("gmc").setExecutor(new QuickModeSwitch());
+        this.getCommand("gms").setExecutor(new QuickModeSwitch());
+        this.getCommand("gma").setExecutor(new QuickModeSwitch());
+        this.getCommand("gmsp").setExecutor(new QuickModeSwitch());
 
-        this.getCommand("clear").setExecutor(new ClearCMD());
-        this.getCommand("clear").setTabCompleter(new ClearCMD());
+        this.getCommand("day").setExecutor(new QuickTimeSwitch());
+        this.getCommand("noon").setExecutor(new QuickTimeSwitch());
+        this.getCommand("night").setExecutor(new QuickTimeSwitch());
+        this.getCommand("midnight").setExecutor(new QuickTimeSwitch());
 
-        this.getCommand("heal").setExecutor(new HealCMD());
-        this.getCommand("heal").setTabCompleter(new HealCMD());
+        this.getCommand("sun").setExecutor(new QuickWeatherSwitch());
+        this.getCommand("rain").setExecutor(new QuickWeatherSwitch());
+        this.getCommand("storm").setExecutor(new QuickWeatherSwitch());
+
+        this.getCommand("fly").setExecutor(new FlyCMD());
 
         this.getCommand("butcher").setExecutor(new ButcherCMD());
 
-        this.getCommand("gmc").setExecutor(new QuickModeSwitchCMD());
-        this.getCommand("gmc").setTabCompleter(new QuickModeSwitchCMD());
+        this.getCommand("clear").setExecutor(new ClearInventoryCMD());
 
-        this.getCommand("gms").setExecutor(new QuickModeSwitchCMD());
-        this.getCommand("gms").setTabCompleter(new QuickModeSwitchCMD());
-
-        this.getCommand("gma").setExecutor(new QuickModeSwitchCMD());
-        this.getCommand("gma").setTabCompleter(new QuickModeSwitchCMD());
-
-        this.getCommand("gmsp").setExecutor(new QuickModeSwitchCMD());
-        this.getCommand("gmsp").setTabCompleter(new QuickModeSwitchCMD());
-
-        this.getCommand("gamemode").setExecutor(new GamemodeCMD());
-        this.getCommand("gamemode").setTabCompleter(new GamemodeCMD());
+        this.getCommand("heal").setExecutor(new HealCMD());
+        this.getCommand("feed").setExecutor(new FeedCMD());
 
         this.getCommand("clearchat").setExecutor(new ClearChatCMD());
-        this.getCommand("clearchat").setTabCompleter(new ClearChatCMD());
 
-        this.getCommand("day").setExecutor(new QuickTimeSwitchCMD());
-        this.getCommand("noon").setExecutor(new QuickTimeSwitchCMD());
-        this.getCommand("night").setExecutor(new QuickTimeSwitchCMD());
-        this.getCommand("midnight").setExecutor(new QuickTimeSwitchCMD());
+        this.getCommand("operator").setExecutor(new OperatorCMD());
 
-        this.getCommand("sun").setExecutor(new QuickWeatherSwitchCMD());
-        this.getCommand("rain").setExecutor(new QuickWeatherSwitchCMD());
-        this.getCommand("storm").setExecutor(new QuickWeatherSwitchCMD());
+        this.getCommand("watchdog").setExecutor(new WatchdogCMD());
 
-        this.getCommand("up").setExecutor(new UpCMD());
-        this.getCommand("up").setTabCompleter(new UpCMD());
-
-        this.getCommand("top").setExecutor(new TopCMD());
+        this.getCommand("i").setExecutor(new SelfGiveCMD());
+        this.getCommand("i").setTabCompleter(new SelfGiveCMD());
 
         this.getCommand("speed").setExecutor(new SpeedCMD());
-        this.getCommand("speed").setTabCompleter(new SpeedCMD());
-    }
 
-    public static Neon getInstance() {
-        return Neon.instance;
-    }
+        this.getCommand("up").setExecutor(new UpCMD());
+        this.getCommand("top").setExecutor(new TopCMD());
 
-    private void setInstance(Neon instance) {
-        Neon.instance = instance;
+        this.getCommand("back").setExecutor(new BackCMD());
     }
 }

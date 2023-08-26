@@ -24,7 +24,7 @@ public class TopCMD implements CommandExecutor {
             Location location = player.getLocation();
             Location topLocation = this.getLocation(player, location);
             player.teleport(topLocation);
-            Message.CMD_TOP_TELEPORTED.send(player);
+            Message.CMD_TOP_SUCCESS.send(player);
             return true;
         } else {
             Message.INVALID_ARGUMENTS.send(player);

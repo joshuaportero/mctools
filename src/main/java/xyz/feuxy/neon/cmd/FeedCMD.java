@@ -3,18 +3,27 @@ package xyz.feuxy.neon.cmd;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import xyz.feuxy.neon.locale.Message;
 
-import java.util.List;
-
-public class FeedCMD implements CommandExecutor, TabCompleter {
+public class FeedCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        return false;
-    }
+        if (!(sender instanceof Player)) {
+            Message.PLAYERS_ONLY.send(sender);
+            return false;
+        }
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return null;
+        Player player = (Player) sender;
+
+        if (args.length == 0) {
+            player.setFoodLevel(20);
+            player.setSaturation(20);
+            Message.CMD_FEED_SELF.send(player);
+            return true;
+        } else {
+            Message.INVALID_ARGUMENTS.send(player);
+        }
+        return false;
     }
 }

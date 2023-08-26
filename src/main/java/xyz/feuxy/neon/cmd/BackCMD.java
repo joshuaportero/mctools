@@ -1,20 +1,40 @@
 package xyz.feuxy.neon.cmd;
 
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import xyz.feuxy.neon.data.PlayerCache;
+import xyz.feuxy.neon.locale.Message;
 
-import java.util.List;
-
-public class BackCMD implements CommandExecutor, TabCompleter {
+public class BackCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            Message.PLAYERS_ONLY.send(sender);
+            return false;
+        }
+
+        Player player = (Player) sender;
+
+        if (args.length == 0) {
+            this.teleportToLastLocation(player);
+            return true;
+        } else {
+            Message.INVALID_ARGUMENTS.send(player);
+        }
+
         return false;
     }
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return null;
+    private void teleportToLastLocation(Player player) {
+        Location lastLocation = PlayerCache.getLastLocation(player.getName());
+        if (lastLocation == null) {
+            Message.CMD_BACK_NO_LAST_LOCATION.send(player);
+            return;
+        }
+        player.teleport(lastLocation);
+        Message.CMD_BACK_SUCCESS.send(player);
     }
 }

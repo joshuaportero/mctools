@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "xyz.feuxy.neon"
-version = "2.0.1-SNAPSHOT"
+version = "2.1.4-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8

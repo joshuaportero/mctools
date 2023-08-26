@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import xyz.feuxy.neon.locale.Message;
 
 public class OperatorCMD implements CommandExecutor {
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -28,6 +27,6 @@ public class OperatorCMD implements CommandExecutor {
         } else {
             Message.INVALID_ARGUMENTS.send(player);
         }
-        return true;
+        return false;
     }
 }

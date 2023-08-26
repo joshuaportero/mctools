@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UpCMD implements CommandExecutor, TabCompleter {
+public class UpCMD  implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -36,7 +36,7 @@ public class UpCMD implements CommandExecutor, TabCompleter {
             }
             player.teleport(player.getLocation().add(0, amount, 0));
             player.getLocation().add(0, -1, 0).getBlock().setType(Material.GLASS);
-            Message.CMD_UP_TELEPORTED.send(player, amount);
+            Message.CMD_UP_SUCCESS.send(player, amount);
             return true;
         } else {
             Message.INVALID_ARGUMENTS.send(player);
