@@ -52,7 +52,7 @@ val majorVersion = "3"
 val minorVersion = "0"
 val patchVersion = determinePatchVersion()
 val apiVersion = "$majorVersion.$minorVersion"
-val fullVersion = "$apiVersion.$patchVersion"
+val fullVersion = "$apiVersion.$patchVersion-BETA"
 
 tasks.register<Copy>("updatePluginYml") {
     from(sourceSets.main.get().resources.srcDirs) {
