@@ -15,7 +15,6 @@ public class Neon extends JavaPlugin {
         }
 
         this.loadConfig();
-        this.registerTasks();
         this.registerListeners();
         this.registerCommands();
     }
@@ -23,10 +22,6 @@ public class Neon extends JavaPlugin {
     private void loadConfig() {
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
-    }
-
-    private void registerTasks() {
-//        Bukkit.getScheduler().runTaskTimer(this, new WatchdogTask(this), 0L, 20L);
     }
 
     private void registerListeners() {
@@ -60,8 +55,6 @@ public class Neon extends JavaPlugin {
         this.getCommand("clearchat").setExecutor(new ClearChatCMD());
 
         this.getCommand("operator").setExecutor(new OperatorCMD());
-
-        this.getCommand("watchdog").setExecutor(new WatchdogCMD());
 
         this.getCommand("i").setExecutor(new SelfGiveCMD());
         this.getCommand("i").setTabCompleter(new SelfGiveCMD());
