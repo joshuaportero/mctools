@@ -1,4 +1,4 @@
-package dev.portero.neon.data;
+package dev.inferno.neon.data;
 
 import org.bukkit.Location;
 

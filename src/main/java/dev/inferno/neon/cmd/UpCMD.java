@@ -1,6 +1,6 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
-import dev.portero.neon.locale.Message;
+import dev.inferno.neon.locale.Message;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

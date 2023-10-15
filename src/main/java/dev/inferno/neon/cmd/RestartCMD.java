@@ -1,4 +1,4 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -6,8 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import dev.portero.neon.Neon;
-import dev.portero.neon.locale.Message;
+import dev.inferno.neon.Neon;
+import dev.inferno.neon.locale.Message;
 
 public class RestartCMD implements CommandExecutor {
 
@@ -41,6 +41,7 @@ public class RestartCMD implements CommandExecutor {
             Message.CMD_RESTART_SUCCESS_TIME.send(player, time);
             new BukkitRunnable() {
                 int count = time;
+                // TODO: Still need to fix this
 
                 @Override
                 public void run() {

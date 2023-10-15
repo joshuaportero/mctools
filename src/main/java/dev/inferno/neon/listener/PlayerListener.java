@@ -1,10 +1,10 @@
-package dev.portero.neon.listener;
+package dev.inferno.neon.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import dev.portero.neon.data.PlayerCache;
+import dev.inferno.neon.data.PlayerCache;
 
 public class PlayerListener implements Listener {
 

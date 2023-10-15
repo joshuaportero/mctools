@@ -1,12 +1,12 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import dev.portero.neon.locale.Message;
+import dev.inferno.neon.locale.Message;
 
-public class ClearChatCMD implements CommandExecutor {
+public class OperatorCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -17,17 +17,16 @@ public class ClearChatCMD implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            this.clearChat(player);
+            player.setOp(!player.isOp());
+            if (player.isOp()) {
+                Message.CMD_OPERATOR_SELF_ENABLED.send(player);
+            } else {
+                Message.CMD_OPERATOR_SELF_DISABLED.send(player);
+            }
+            return true;
         } else {
             Message.INVALID_ARGUMENTS.send(player);
         }
-
         return false;
-    }
-
-    private void clearChat(Player player) {
-        for (int i = 0; i < 100; i++) {
-            Message.CMD_CLEARCHAT.send(player);
-        }
     }
 }

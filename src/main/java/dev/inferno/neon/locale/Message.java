@@ -1,4 +1,4 @@
-package dev.portero.neon.locale;
+package dev.inferno.neon.locale;
 
 public interface Message {
 

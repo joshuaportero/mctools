@@ -1,4 +1,4 @@
-package dev.portero.neon.util;
+package dev.inferno.neon.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

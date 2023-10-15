@@ -1,12 +1,12 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
-import dev.portero.neon.locale.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import dev.inferno.neon.locale.Message;
 
-public class FeedCMD implements CommandExecutor {
+public class ClearChatCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -17,13 +17,17 @@ public class FeedCMD implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            player.setFoodLevel(20);
-            player.setSaturation(20);
-            Message.CMD_FEED_SELF.send(player);
-            return true;
+            this.clearChat(player);
         } else {
             Message.INVALID_ARGUMENTS.send(player);
         }
+
         return false;
+    }
+
+    private void clearChat(Player player) {
+        for (int i = 0; i < 100; i++) {
+            Message.CMD_CLEARCHAT.send(player);
+        }
     }
 }

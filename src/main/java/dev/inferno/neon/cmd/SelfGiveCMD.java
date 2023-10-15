@@ -1,4 +1,4 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import dev.portero.neon.locale.Message;
+import dev.inferno.neon.locale.Message;
 
 import java.util.Arrays;
 import java.util.List;

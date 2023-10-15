@@ -1,7 +1,8 @@
-package dev.portero.neon;
+package dev.inferno.neon;
 
+import dev.inferno.neon.cmd.*;
+import dev.inferno.neon.listener.PlayerListener;
 import dev.portero.neon.cmd.*;
-import dev.portero.neon.listener.PlayerListener;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.feuxy.neon.cmd.*;

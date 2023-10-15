@@ -1,12 +1,12 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
-import dev.portero.neon.util.BoolPair;
+import dev.inferno.neon.util.BoolPair;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import dev.portero.neon.locale.Message;
+import dev.inferno.neon.locale.Message;
 
 import java.util.HashMap;
 import java.util.Map;

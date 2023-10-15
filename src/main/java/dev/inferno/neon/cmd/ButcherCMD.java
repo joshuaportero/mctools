@@ -1,4 +1,4 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Player;
-import dev.portero.neon.locale.Message;
+import dev.inferno.neon.locale.Message;
 
 import java.time.Duration;
 import java.time.Instant;

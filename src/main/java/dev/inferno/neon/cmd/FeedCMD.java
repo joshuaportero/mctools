@@ -1,12 +1,12 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
-import dev.portero.neon.locale.Message;
+import dev.inferno.neon.locale.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FlyCMD implements CommandExecutor {
+public class FeedCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -17,12 +17,9 @@ public class FlyCMD implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            player.setAllowFlight(!player.getAllowFlight());
-            if (player.getAllowFlight()) {
-                Message.CMD_FLY_SELF_ENABLED.send(player);
-            } else {
-                Message.CMD_FLY_SELF_DISABLED.send(player);
-            }
+            player.setFoodLevel(20);
+            player.setSaturation(20);
+            Message.CMD_FEED_SELF.send(player);
             return true;
         } else {
             Message.INVALID_ARGUMENTS.send(player);

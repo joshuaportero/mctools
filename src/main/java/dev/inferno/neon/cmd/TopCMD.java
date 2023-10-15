@@ -1,4 +1,4 @@
-package dev.portero.neon.cmd;
+package dev.inferno.neon.cmd;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -7,7 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import dev.portero.neon.locale.Message;
+import dev.inferno.neon.locale.Message;
 
 public class TopCMD implements CommandExecutor {
     @Override
