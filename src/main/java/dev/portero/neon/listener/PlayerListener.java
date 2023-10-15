@@ -1,10 +1,10 @@
-package xyz.feuxy.neon.listener;
+package dev.portero.neon.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import xyz.feuxy.neon.data.PlayerCache;
+import dev.portero.neon.data.PlayerCache;
 
 public class PlayerListener implements Listener {
 

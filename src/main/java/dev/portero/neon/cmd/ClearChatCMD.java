@@ -1,13 +1,12 @@
-package xyz.feuxy.neon.cmd;
+package dev.portero.neon.cmd;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import xyz.feuxy.neon.locale.Message;
+import dev.portero.neon.locale.Message;
 
-public class HealCMD implements CommandExecutor {
+public class ClearChatCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -18,22 +17,17 @@ public class HealCMD implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            this.restorePlayer(player);
-            return true;
+            this.clearChat(player);
         } else {
             Message.INVALID_ARGUMENTS.send(player);
         }
+
         return false;
     }
 
-    private void restorePlayer(Player player) {
-        player.setHealth(20);
-        player.setFoodLevel(20);
-        player.setSaturation(20);
-        player.setFireTicks(0);
-        for (PotionEffect effect : player.getActivePotionEffects()) {
-            player.removePotionEffect(effect.getType());
+    private void clearChat(Player player) {
+        for (int i = 0; i < 100; i++) {
+            Message.CMD_CLEARCHAT.send(player);
         }
-        Message.CMD_HEAL_SELF.send(player);
     }
 }

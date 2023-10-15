@@ -1,4 +1,4 @@
-package xyz.feuxy.neon.util;
+package dev.portero.neon.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

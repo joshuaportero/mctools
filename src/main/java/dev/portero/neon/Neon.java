@@ -1,9 +1,10 @@
-package xyz.feuxy.neon;
+package dev.portero.neon;
 
+import dev.portero.neon.cmd.*;
+import dev.portero.neon.listener.PlayerListener;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.feuxy.neon.cmd.*;
-import xyz.feuxy.neon.listener.PlayerListener;
 
 @Getter
 public class Neon extends JavaPlugin {

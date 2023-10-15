@@ -1,4 +1,4 @@
-package xyz.feuxy.neon.data;
+package dev.portero.neon.data;
 
 import org.bukkit.Location;
 

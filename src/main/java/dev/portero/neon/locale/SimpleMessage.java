@@ -1,4 +1,4 @@
-package xyz.feuxy.neon.locale;
+package dev.portero.neon.locale;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

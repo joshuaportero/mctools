@@ -1,4 +1,4 @@
-package xyz.feuxy.neon.locale;
+package dev.portero.neon.locale;
 
 public interface Message {
 
@@ -30,4 +30,6 @@ public interface Message {
     SimpleMessage CMD_TOP_SUCCESS = () -> "&aYou have been teleported to the &eTOP OF THE WORLD&a!";
     SimpleMessage CMD_BACK_NO_LAST_LOCATION = () -> "&cYou do not have a last location to teleport to!";
     SimpleMessage CMD_BACK_SUCCESS = () -> "&aYou have been teleported to &eYOUR LAST LOCATION&a!";
+    SimpleMessage CMD_RESTART_SUCCESS = () -> "&6The server is now restarting!";
+    SimpleMessage CMD_RESTART_SUCCESS_TIME = () -> "&6The server is now restarting in &e%s &6seconds!";
 }

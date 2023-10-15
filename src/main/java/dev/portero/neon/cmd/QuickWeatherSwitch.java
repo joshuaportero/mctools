@@ -1,12 +1,12 @@
-package xyz.feuxy.neon.cmd;
+package dev.portero.neon.cmd;
 
+import dev.portero.neon.util.BoolPair;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.feuxy.neon.locale.Message;
-import xyz.feuxy.neon.util.BoolPair;
+import dev.portero.neon.locale.Message;
 
 import java.util.HashMap;
 import java.util.Map;

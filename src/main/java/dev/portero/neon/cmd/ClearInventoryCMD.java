@@ -1,12 +1,12 @@
-package xyz.feuxy.neon.cmd;
+package dev.portero.neon.cmd;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.feuxy.neon.locale.Message;
+import dev.portero.neon.locale.Message;
 
-public class SpeedCMD implements CommandExecutor {
+public class ClearInventoryCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -17,18 +17,16 @@ public class SpeedCMD implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            float speed;
-            if (player.getFlySpeed() == 0.1f) {
-                speed = 1f;
-            } else {
-                speed = 0.1f;
-            }
-            player.setFlySpeed(speed);
-            Message.CMD_SPEED_SELF.send(player, speed);
-            return true;
+            this.clearInventory(player);
         } else {
             Message.INVALID_ARGUMENTS.send(player);
         }
         return false;
     }
+
+    private void clearInventory(Player player) {
+        player.getInventory().clear();
+        Message.CMD_CLEAR_SELF.send(player);
+    }
+
 }
