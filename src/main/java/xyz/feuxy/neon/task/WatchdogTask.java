@@ -52,6 +52,13 @@ public class WatchdogTask implements Runnable {
                     continue;
                 }
 
+                // Check if plugin version is greater than the loaded one (if so, unload the loaded one)
+                if (pluginModel.getVersion().compareTo(plugin.getDescription().getVersion()) > 0) {
+                    pluginMap.remove(baseName);
+                    plugin.getServer().getPluginManager().disablePlugin(plugin.getServer().getPluginManager().getPlugin(baseName));
+                    handleDuplicate(pluginModel.getFile());
+                }
+
                 // If the plugin is already loaded, but the file is different, handle the duplicate
                 handleDuplicate(file);
             } else {

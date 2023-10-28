@@ -1,11 +1,10 @@
 package xyz.feuxy.neon;
 
-import dev.inferno.neon.cmd.*;
-import xyz.feuxy.neon.listener.PlayerListener;
-import xyz.feuxy.neon.task.WatchdogTask;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.feuxy.neon.cmd.*;
+import xyz.feuxy.neon.listener.PlayerListener;
+import xyz.feuxy.neon.task.WatchdogTask;
 
 @Getter
 public class Neon extends JavaPlugin {
