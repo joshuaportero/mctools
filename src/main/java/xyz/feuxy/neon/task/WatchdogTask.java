@@ -1,8 +1,8 @@
 package xyz.feuxy.neon.task;
 
-import xyz.feuxy.neon.model.PluginModel;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import xyz.feuxy.neon.model.PluginModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -44,6 +45,7 @@ public class WatchdogTask implements Runnable {
             if (baseName.equals("neon")) continue; // Ignore Neon's jar file
 
             // Check if the plugin is already loaded
+            // Check if the plugin is already loaded
             if (pluginMap.containsKey(baseName)) {
                 PluginModel pluginModel = pluginMap.get(baseName);
 
@@ -52,15 +54,14 @@ public class WatchdogTask implements Runnable {
                     continue;
                 }
 
-                // Check if plugin version is greater than the loaded one (if so, unload the loaded one)
-                if (pluginModel.getVersion().compareTo(plugin.getDescription().getVersion()) > 0) {
-                    pluginMap.remove(baseName);
-                    plugin.getServer().getPluginManager().disablePlugin(plugin.getServer().getPluginManager().getPlugin(baseName));
+                // Check if the new plugin version is greater than the loaded one
+                if (pluginModel.getVersion().compareTo(Objects.requireNonNull(retrievePluginDataFromFile(file)).getVersion()) < 0) {
+                    // If old version is less than new version, remove old one
                     handleDuplicate(pluginModel.getFile());
+                } else {
+                    // Else, handle the new duplicate
+                    handleDuplicate(file);
                 }
-
-                // If the plugin is already loaded, but the file is different, handle the duplicate
-                handleDuplicate(file);
             } else {
                 // If the plugin is not loaded, load it
                 PluginModel pluginModel = retrievePluginDataFromFile(file);
@@ -70,6 +71,7 @@ public class WatchdogTask implements Runnable {
 
                 pluginMap.put(baseName, pluginModel);
             }
+
         }
     }
 
@@ -102,7 +104,7 @@ public class WatchdogTask implements Runnable {
     }
 
     private String getBasePluginName(String fileName) {
-        return fileName.replaceAll("[-_\\d.]", "");
+        return fileName.split("-")[0];
     }
 
     private void handleDuplicate(File duplicate) {
