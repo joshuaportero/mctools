@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -45,7 +44,6 @@ public class WatchdogTask implements Runnable {
             if (baseName.equals("neon")) continue; // Ignore Neon's jar file
 
             // Check if the plugin is already loaded
-            // Check if the plugin is already loaded
             if (pluginMap.containsKey(baseName)) {
                 PluginModel pluginModel = pluginMap.get(baseName);
 
@@ -54,12 +52,15 @@ public class WatchdogTask implements Runnable {
                     continue;
                 }
 
-                // Check if the new plugin version is greater than the loaded one
-                if (pluginModel.getVersion().compareTo(Objects.requireNonNull(retrievePluginDataFromFile(file)).getVersion()) < 0) {
-                    // If old version is less than new version, remove old one
+                // Compare the file's last modified time
+                long currentFileTime = file.lastModified();
+                long existingFileTime = pluginModel.getFile().lastModified();
+
+                if (currentFileTime > existingFileTime) {
+                    // If the current file is newer, remove the old one
                     handleDuplicate(pluginModel.getFile());
                 } else {
-                    // Else, handle the new duplicate
+                    // If the existing file is newer or same age, remove the current file
                     handleDuplicate(file);
                 }
             } else {
