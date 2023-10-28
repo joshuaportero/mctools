@@ -20,10 +20,15 @@ tasks.withType<JavaCompile> {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    }
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"){
+        exclude(group = "net.md-5", module = "bungeecord-chat")
+    }
 
     compileOnly("org.jetbrains:annotations:24.0.0")
 

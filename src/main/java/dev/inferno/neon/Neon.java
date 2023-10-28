@@ -2,10 +2,9 @@ package dev.inferno.neon;
 
 import dev.inferno.neon.cmd.*;
 import dev.inferno.neon.listener.PlayerListener;
-import dev.portero.neon.cmd.*;
+import dev.inferno.neon.task.WatchdogTask;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.feuxy.neon.cmd.*;
 
 @Getter
 public class Neon extends JavaPlugin {
@@ -16,6 +15,8 @@ public class Neon extends JavaPlugin {
             return;
         }
 
+        this.registerTasks();
+
         this.loadConfig();
         this.registerListeners();
         this.registerCommands();
@@ -24,6 +25,10 @@ public class Neon extends JavaPlugin {
     private void loadConfig() {
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
+    }
+
+    private void registerTasks() {
+        this.getServer().getScheduler().runTaskTimerAsynchronously(this, new WatchdogTask(this), 0L, 20L);
     }
 
     private void registerListeners() {
