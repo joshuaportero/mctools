@@ -3,6 +3,7 @@ name: Neon
 version: ${version}
 author: Feuxy
 description: Neon is development kit for Minecraft plugins. Do not use this plugin in production environment.
+softdepend: [PlugManX]
 api-version: 1.13
 commands:
   clear:

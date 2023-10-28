@@ -1,5 +1,6 @@
 package xyz.feuxy.neon.task;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import xyz.feuxy.neon.model.PluginModel;
@@ -61,15 +62,28 @@ public class WatchdogTask implements Runnable {
                     handleDuplicate(pluginModel.getFile());
                 } else {
                     // If the existing file is newer or same age, remove the current file
+                    Bukkit.getScheduler().callSyncMethod(plugin, () ->
+                            Bukkit.getServer().dispatchCommand(
+                                    Bukkit.getConsoleSender(), "plugman unload " + pluginModel.getName()
+                            )
+                    );
                     handleDuplicate(file);
                 }
+                pluginMap.remove(baseName);
+                break;
             } else {
                 // If the plugin is not loaded, load it
                 PluginModel pluginModel = retrievePluginDataFromFile(file);
+
                 if (pluginModel == null) {
                     continue;
                 }
 
+                Bukkit.getScheduler().callSyncMethod(plugin, () ->
+                        Bukkit.getServer().dispatchCommand(
+                                Bukkit.getConsoleSender(), "plugman load " + file.getName()
+                        )
+                );
                 pluginMap.put(baseName, pluginModel);
             }
 
@@ -109,13 +123,13 @@ public class WatchdogTask implements Runnable {
     }
 
     private void handleDuplicate(File duplicate) {
-        // Simplest approach: delete the duplicate.
-        // More complex logic can be added, like comparing timestamps, versions, etc.
         boolean success = duplicate.delete();
+
         if (!success) {
             plugin.getLogger().warning("Failed to delete duplicate plugin JAR: " + duplicate.getName());
             return;
         }
+
         plugin.getLogger().warning("Deleted duplicate plugin JAR: " + duplicate.getName());
     }
 }
