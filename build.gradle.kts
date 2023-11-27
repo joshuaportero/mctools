@@ -6,11 +6,11 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
-group = "xyz.feuxy.neon"
+group = "dev.portero.neon"
 version = "3.0.0-SNAPSHOT"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(8))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 tasks.withType<JavaCompile> {
@@ -20,15 +20,16 @@ tasks.withType<JavaCompile> {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven {
-        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven{
+        name = "PaperMC"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
     }
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"){
-        exclude(group = "net.md-5", module = "bungeecord-chat")
-    }
+    implementation("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
+
+    implementation("net.kyori:adventure-api:4.14.0")
 
     compileOnly("org.jetbrains:annotations:24.0.0")
 
@@ -53,7 +54,7 @@ val determinePatchVersion: () -> Int = {
     }
 }
 
-val majorVersion = "3"
+val majorVersion = "4"
 val minorVersion = "0"
 val patchVersion = determinePatchVersion()
 val apiVersion = "$majorVersion.$minorVersion"

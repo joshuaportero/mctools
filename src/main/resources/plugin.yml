@@ -1,9 +1,8 @@
-main: xyz.feuxy.neon.Neon
+main: dev.portero.neon.Neon
 name: Neon
 version: ${version}
-author: Feuxy
+author: Portero
 description: Neon is development kit for Minecraft plugins. Do not use this plugin in production environment.
-softdepend: [PlugManX]
 api-version: 1.13
 commands:
   clear:
@@ -49,7 +48,7 @@ commands:
   feed:
     description: Feed yourself.
   watchdog:
-    description: Manage watchdog.
+    description: Help for the Watchdog System.
   i:
     description: Get an item.
   speed:
