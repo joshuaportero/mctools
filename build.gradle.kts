@@ -1,44 +1,67 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import xyz.jpenilla.runpaper.task.RunServer
 
 plugins {
-    id("java")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("java-library")
+    id("com.gradleup.shadow") version "9.0.0-beta4"
+    id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
-group = "xyz.feuxy.neon"
-version = "1.3.0-SNAPSHOT"
+group = "dev.portero.mctools"
+version = "5.0.0-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 repositories {
+    maven {
+        name = "PaperMC"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
+    maven {
+        name = "Panda-Lang"
+        url = uri("https://repo.panda-lang.org/releases")
+    }
     mavenCentral()
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
 
-    compileOnly("org.projectlombok:lombok:1.18.28")
-    annotationProcessor("org.projectlombok:lombok:1.18.28")
+    compileOnly("org.projectlombok:lombok:1.18.36")
+    annotationProcessor("org.projectlombok:lombok:1.18.36")
+
+    implementation("org.jetbrains:annotations:24.0.0")
+    implementation("dev.rollczi:litecommands-bukkit:3.9.5")
+    implementation("dev.rollczi:litecommands-adventure:3.9.5")
+    implementation("dev.triumphteam:triumph-gui:3.1.11")
 }
 
-tasks.register<Copy>("updatePluginYml") {
-    from(sourceSets.main.get().resources.srcDirs) {
-        include("**/plugin.yml")
-        expand("version" to project.version)
-    }
-    into(File(buildDir, "resources/main"))
+bukkit {
+    main = "dev.portero.tools.ToolsPlugin"
+    version = project.version.toString()
+    apiVersion = "1.21.4"
+    description = "Tools is development kit for Minecraft plugins. Do not use this plugin in production environment."
+    website = "https://joshua.portero.dev/"
+    authors = listOf("Portero")
 }
 
-tasks.named<ShadowJar>("shadowJar") {
-    dependsOn("updatePluginYml")
-    archiveFileName.set("Neon.jar")
+tasks.withType<JavaCompile> {
+    options.compilerArgs.addAll(listOf("-Xlint:unchecked", "-Xlint:deprecation", "-parameters"))
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("Tools-${project.version}")
+    archiveVersion.set("")
+    archiveClassifier.set("")
+
+    relocate("dev.rollczi.litecommands", "dev.portero.atlas.commands")
+    relocate("dev.triumphteam.gui", "dev.portero.atlas.triumphgui")
+}
+
+tasks.withType<RunServer> {
+    minecraftVersion("1.21.4")
 }
